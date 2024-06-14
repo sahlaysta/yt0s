@@ -39,7 +39,7 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
 		}
 		case 'yt0s_menuItem_startAt0sInNewTab': {
 			const videoUrl = new URL(info.linkUrl);
-			videoUrl.searchParams.delete('t');
+			videoUrl.searchParams.set('t', 0);
 			const videoUrl0s = videoUrl.href;
 			browser.tabs.create({active: false, url: videoUrl0s, index: tab.index + 1});
 			break;
