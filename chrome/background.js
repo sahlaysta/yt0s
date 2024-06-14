@@ -32,7 +32,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 	switch (info?.menuItemId) {
 		case 'yt0s_menuItem_startAt0sInCurrentTab': {
 			const videoUrl = new URL(info.linkUrl);
-			videoUrl.searchParams.delete('t');
+			videoUrl.searchParams.set('t', 0);
 			const videoUrl0s = videoUrl.href;
 			chrome.tabs.sendMessage(tab.id, {targetLink: videoUrl0s, action: 'yt0s_perform_startAt0sInCurrentTab'});
 			break;
