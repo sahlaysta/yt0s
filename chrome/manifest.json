@@ -1,0 +1,26 @@
+{
+	"manifest_version": 3,
+	"name": "yt0s",
+	"description": "YouTube right-click option to start at 0 seconds",
+	"version": "1.0",
+	"homepage_url": "https://github.com/sahlaysta",
+	"icons": {
+		"48": "icons/yt0s-48.png"
+	},
+	"permissions": [
+		"contextMenus"
+	],
+	"content_scripts": [
+		{
+			"matches": [
+				"*://*.youtube.com/*"
+			],
+			"js": [
+				"content.js"
+			]
+		}
+	],
+	"background": {
+		"service_worker": "background.js"
+	}
+}
