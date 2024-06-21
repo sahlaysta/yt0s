@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener((data, sender) => {
 		}
 		case 'yt0s_disableContextMenuOptions': {
 			if (menuItemsAlive) {
-				chrome.contextMenus.remove('yt0s_menuItem_startAt0sInCurrentTab');
+				/*TODO*/if(false)chrome.contextMenus.remove('yt0s_menuItem_startAt0sInCurrentTab');
 				chrome.contextMenus.remove('yt0s_menuItem_startAt0sInNewTab');
 				menuItemsAlive = false;
 			}
