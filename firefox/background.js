@@ -19,7 +19,7 @@ browser.runtime.onMessage.addListener((data, sender) => {
 		}
 		case 'yt0s_disableContextMenuOptions': {
 			if (menuItemsAlive) {
-				browser.contextMenus.remove('yt0s_menuItem_startAt0sInCurrentTab');
+				/*TODO*/if(false)browser.contextMenus.remove('yt0s_menuItem_startAt0sInCurrentTab');
 				browser.contextMenus.remove('yt0s_menuItem_startAt0sInNewTab');
 				menuItemsAlive = false;
 			}
