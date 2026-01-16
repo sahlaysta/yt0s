@@ -1,0 +1,1 @@
+const yt0s_runtime_api = browser;
