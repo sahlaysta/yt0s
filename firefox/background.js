@@ -11,12 +11,12 @@ if (typeof importScripts !== "undefined") {
 				if (!menuItemsState) {
 					//yt0s_runtime_api.contextMenus.create({
 					//	id: "yt0s_menuItem_startAt0sInCurrentTab",
-					//	title: "Start at 0s",
+					//	title: "Start at 0:00",
 					//	contexts: ["all"]
 					//});
 					yt0s_runtime_api.contextMenus.create({
 						id: "yt0s_menuItem_startAt0sInNewTab",
-						title: "Start at 0s in new tab",
+						title: "Start at 0:00 in new tab",
 						contexts: ["all"]
 					});
 					menuItemsState = true;
