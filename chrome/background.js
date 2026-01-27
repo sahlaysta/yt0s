@@ -2,34 +2,26 @@ if (typeof importScripts !== "undefined") {
 	importScripts("yt0s_runtime_api.js");
 }
 {
-	let menuItemsState = false;
 	let videoUrl;
 	yt0s_runtime_api.runtime.onMessage.addListener((data, sender) => {
-		switch (data.pushName) {
+		switch (data?.pushName) {
 			case "yt0s_startContextMenuOptions": {
 				videoUrl = data.videoUrl;
-				if (!menuItemsState) {
-					//yt0s_runtime_api.contextMenus.create({
-					//	id: "yt0s_menuItem_startAt0sInCurrentTab",
-					//	title: "Start at 0:00",
-					//	contexts: ["all"]
-					//});
-					yt0s_runtime_api.contextMenus.create({
-						id: "yt0s_menuItem_startAt0sInNewTab",
-						title: "Start at 0:00 in new tab",
-						contexts: ["all"]
-					});
-					menuItemsState = true;
-				}
+				//yt0s_runtime_api.contextMenus.create({
+				//	id: "yt0s_menuItem_startAt0sInCurrentTab",
+				//	title: "Start at 0:00",
+				//	contexts: ["all"]
+				//});
+				yt0s_runtime_api.contextMenus.create({
+					id: "yt0s_menuItem_startAt0sInNewTab",
+					title: "Start at 0:00 in new tab",
+					contexts: ["all"]
+				});
 				break;
 			}
 			case "yt0s_disableContextMenuOptions": {
 				videoUrl = null;
-				if (menuItemsState) {
-					//yt0s_runtime_api.contextMenus.remove("yt0s_menuItem_startAt0sInCurrentTab");
-					yt0s_runtime_api.contextMenus.remove("yt0s_menuItem_startAt0sInNewTab");
-					menuItemsState = false;
-				}
+				yt0s_runtime_api.contextMenus.removeAll();
 				break;
 			}
 		}

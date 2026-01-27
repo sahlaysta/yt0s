@@ -4,21 +4,35 @@
 	
 	function focusInOrMouseDown(targetElem) {
 		function scrapeUrl() {
+			
 			{
 				const elem = targetElem.closest("yt-lockup-view-model");
 				if (elem) {
 					const titleChildren = elem.getElementsByClassName("yt-lockup-metadata-view-model__title");
-					if (titleChildren && titleChildren.length === 1) {
-						return titleChildren[0].href;
+					if (titleChildren) {
+						const child = titleChildren[0];
+						if (child) {
+							const href = child.href;
+							if (href) {
+								return href;
+							}
+						}
 					}
 				}
 			}
+			
 			{
 				const elem = targetElem.closest("ytd-rich-item-renderer");
 				if (elem) {
 					const titleChildren = elem.getElementsByClassName("reel-item-endpoint");
-					if (titleChildren && titleChildren.length === 1) {
-						return titleChildren[0].href;
+					if (titleChildren) {
+						const child = titleChildren[0];
+						if (child) {
+							const href = child.href;
+							if (href) {
+								return href;
+							}
+						}
 					}
 				}
 			}
@@ -26,15 +40,44 @@
 			{
 				const elem = targetElem.closest("#media-container-link");
 				if (elem) {
-					return elem.href;
+					const href = elem.href;
+					if (href) {
+						return href;
+					}
 				}
 			}
 			
 			{
-				const targetHref = targetElem.href;
-				if (targetHref) {
-					if (ytLinkVerifier.test(targetHref)) {
-						return targetHref;
+				const elem = targetElem.closest(".yt-simple-endpoint");
+				if (elem) {
+					const href = elem.href;
+					if (href) {
+						return href;
+					}
+				}
+			}
+			
+			{
+				const elem = targetElem.closest("ytd-playlist-panel-video-renderer");
+				if (elem) {
+					const titleChildren = elem.getElementsByClassName("yt-simple-endpoint");
+					if (titleChildren) {
+						const child = titleChildren[0];
+						if (child) {
+							const href = child.href;
+							if (href) {
+								return href;
+							}
+						}
+					}
+				}
+			}
+			
+			{
+				const href = targetElem.href;
+				if (href) {
+					if (ytLinkVerifier.test(href)) {
+						return href;
 					}
 				}
 			}
@@ -53,14 +96,24 @@
 		}
 	}
 	document.addEventListener("focusin", event => {
-		focusInOrMouseDown(event.target);
+		const targetElem = event.target;
+		if (targetElem) {
+			focusInOrMouseDown(targetElem);
+		} else {
+			yt0s_runtime_api.runtime.sendMessage({pushName: "yt0s_disableContextMenuOptions", videoUrl: null});
+		}
 	});
 	document.addEventListener("mousedown", event => {
-		focusInOrMouseDown(event.target);
+		const targetElem = event.target;
+		if (targetElem) {
+			focusInOrMouseDown(targetElem);
+		} else {
+			yt0s_runtime_api.runtime.sendMessage({pushName: "yt0s_disableContextMenuOptions", videoUrl: null});
+		}
 	});
-	document.addEventListener("focusout", event => {
-		yt0s_runtime_api.runtime.sendMessage({pushName: "yt0s_disableContextMenuOptions", videoUrl: null});
-	});
+	//document.addEventListener("focusout", event => {
+	//	yt0s_runtime_api.runtime.sendMessage({pushName: "yt0s_disableContextMenuOptions", videoUrl: null});
+	//});
 	//yt0s_runtime_api.runtime.onMessage.addListener((data, sender) => {
 		//switch (data?.action) {
 		//	case "yt0s_perform_startAt0sInCurrentTab": {
